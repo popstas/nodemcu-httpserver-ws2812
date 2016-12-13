@@ -1,5 +1,7 @@
 $(function() {
     var host = Cookies.get('host', 'ws2812-strip-1');
+    // ip from nodemcu
+    if(window.ws2812_ip) host = window.ws2812_ip;
     if(window.location.hash){
         host = window.location.hash.replace('#', '');
         Cookies.set('host', host, { expires: 365, path: '' });
