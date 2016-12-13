@@ -10,7 +10,6 @@ local function change_color(connection, r, g, b)
 end
 
 return function (connection, req, post)
-    print('post:', post)
     print('Color changing to', post.r, post.g, post.b)
     if post.r and post.g and post.b then
         change_color(connection, post.r, post.g, post.b)
