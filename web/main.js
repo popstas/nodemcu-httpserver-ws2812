@@ -65,6 +65,14 @@ $(function() {
         ]*/
     });
 
+    $(function () {
+        $('.newyear-on').on('click', function () {
+            $.get('http://' + host + '/ws2812.lua', {
+                action: 'newyear'
+            });
+        })
+    });
+
     colorpickerInput.trigger('change');
     $(window).on('resize', changeInputSize);
     changeInputSize();
