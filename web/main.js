@@ -13,7 +13,6 @@ $(function() {
     var changeColor = function(color){
         if(isAjax) return;
         isAjax = true;
-        console.log('send');
         Cookies.set('color', color.toHexString(), { expires: 365, path: '' });
         return $.get('http://' + host + '/ws2812.lua', {
             r: Math.round(color._r),

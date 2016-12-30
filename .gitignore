@@ -1,1 +1,3 @@
 *.swp
+/httpserver-conf-wifi.lua
+/httpserver-conf.lua
