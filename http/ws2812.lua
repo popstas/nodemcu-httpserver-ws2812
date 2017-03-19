@@ -176,15 +176,15 @@ local function newyear_off()
     tmr.unregister(0)
 end
 
-return function (connection, req, post)
-    if post.action == 'newyear' then
+return function (connection, req, get)
+    if get.action == 'newyear' then
          newyear_on()
     else
         newyear_off()
 
-        print('Color changing to', post.r, post.g, post.b)
-        if post.r and post.g and post.b then
-            change_color(connection, post.r, post.g, post.b)
+        print('Color changing to', get.r, get.g, get.b)
+        if get.r and get.g and get.b then
+            change_color(connection, get.r, get.g, get.b)
         else
             connection:send("HTTP/1.0 200 OK\r\nContent-Type: application/json\r\nCache-Control: private, no-store\r\n\r\n")
             connection:send('{"error":-1, "message":"Bad color"}')

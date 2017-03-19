@@ -1,4 +1,4 @@
-led_count         = 300 -- count of
+led_count         = 150 -- count of
 delay_ms          = 15  -- one frame delay, do not set bellow 15 ms
 brightness        = 0.6 -- brightness of strip, 0 to 1, at 1 will be absolutely white
 saturation        = 1   -- 0 to 1, more for more contrast
@@ -17,6 +17,15 @@ local initStrip = function()
 
     buffer:fill(0, 0, 0)
     ws2812.write(buffer)
+    
+    -- local ws = dofile('http/ws2812.lua')
+    -- local connection = {}
+    -- connection.send = function()
+    --     
+    -- end
+    -- local get = {}
+    -- get['action'] = 'newyear'
+    -- ws(connection, nil, get)
 end
 
 local wifiInit = function()
@@ -82,22 +91,22 @@ collectgarbage()
 local joinCounter = 0
 local joinMaxAttempts = 5
 tmr.alarm(0, 3000, 1, function()
-   local ip = wifi.sta.getip()
-   if ip == nil and joinCounter < joinMaxAttempts then
-      print('Connecting to WiFi Access Point ...')
-      joinCounter = joinCounter +1
-   else
-      if joinCounter == joinMaxAttempts then
-         print('Failed to connect to WiFi Access Point.')
-      else
-         print('IP: ',ip)
-         saveIp(ip)
-         dofile("httpserver.lc")(80)
-      end
-      tmr.stop(0)
-      joinCounter = nil
-      joinMaxAttempts = nil
-      collectgarbage()
-   end
+    local ip = wifi.sta.getip()
+    if ip == nil and joinCounter < joinMaxAttempts then
+        print('Connecting to WiFi Access Point ...')
+        joinCounter = joinCounter +1
+    else
+        if joinCounter == joinMaxAttempts then
+            print('Failed to connect to WiFi Access Point.')
+        else
+            print('IP: ',ip)
+            saveIp(ip)
+            dofile("httpserver.lc")(80) 
+        end
+        tmr.stop(0)
+        joinCounter = nil
+        joinMaxAttempts = nil
+        collectgarbage()
+    end
 end)
 
