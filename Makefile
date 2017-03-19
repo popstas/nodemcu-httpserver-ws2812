@@ -4,8 +4,8 @@
 # Path to nodemcu-uploader (https://github.com/kmpm/nodemcu-uploader)
 NODEMCU-UPLOADER=../nodemcu-uploader/nodemcu-uploader.py
 # Serial port
-PORT=/dev/cu.SLAB_USBtoUART
-SPEED=9600
+PORT=/dev/tty.wchusbserial14630
+SPEED=115200
 
 ######################################################################
 # End of user config
@@ -17,6 +17,7 @@ LUA_FILES := \
    httpserver-b64decode.lua \
    httpserver-basicauth.lua \
    httpserver-conf.lua \
+   httpserver-conf-wifi.lua \
    httpserver-connection.lua \
    httpserver-error.lua \
    httpserver-header.lua \
@@ -34,6 +35,9 @@ usage:
 # Upload one files only
 upload:
 	@python $(NODEMCU-UPLOADER) -b $(SPEED) -p $(PORT) upload $(FILE)
+
+upload_init:
+	@python $(NODEMCU-UPLOADER) -b $(SPEED) -p $(PORT) upload init.lua
 
 # Upload HTTP files only
 upload_http: $(HTTP_FILES)
